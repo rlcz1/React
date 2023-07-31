@@ -50,6 +50,11 @@
     background-color: #111;
     cursor: pointer;
 }
+.register-form > .register-item > span {
+    color: red;
+    font-size: 14px;
+    float: left;
+}
 
 #register-radio-btns {
     display: flex;
