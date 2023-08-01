@@ -3,16 +3,10 @@ import './Register.css';
 
 const Register = () => {
 
-    const [form, setForm] = useState({
-        name: '',
-        mobile: '',
-        email: '',
-        password: '',
-        repassword: '',
-        select: '',
-        checkbox: false,
-        radio: ''
-    });
+    // const [password, checkPassword] = useState({
+    //     password: '',
+    //     repassword: '',
+    // });
 
     const [validText, setValidText] = useState('');
 
@@ -28,22 +22,18 @@ const Register = () => {
 
     const onChangeHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         let regName = /[^ㄱ-ㅎ가-힣]/g;
-        let regMobile = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-        let regEmail = '';
-        let regPassword = '';
-        let regRepassword = '';
-        let regSelect = '';
-        let regCheckbox = '';
-        let regRadio = '';
-
-        console.log(e.target.name);
+        let regMobile = /^([0-9]{3})-?([0-9]{4})-?([0-9]{4})$/;
+        let regEmail = /^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]/i
+        let regPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
 
         let target = e.target.name;
 
+        let val = e.target.value;
+
         switch (target) {
             case 'name':
-                if (regName.test(e.target.value)) {
-                    setValidText('한글만 입력 가능합니다.');
+                if (val != '' && regName.test(val)) {
+                    setValidText('형식에 알맞지 않습니다.');
                     setError({...error, name: false });
                 } else {
                     setValidText('');
@@ -51,18 +41,36 @@ const Register = () => {
                 }
                 break;
             case 'mobile':
-                if (!regMobile.test(e.target.value)) {
-                    setValidText('올바른 휴대폰 번호가 아닙니다.');
+                if (val != '' && !regMobile.test(val)) {
+                    setValidText('형식에 알맞지 않습니다.');
                     setError({...error, mobile: false });
                 } else {
                     setValidText('');
                     setError({...error, mobile: true });
                 }
+                break;
+            case 'password':
+                if (val != '' && !regPassword.test(val)) {
+                    setValidText('형식에 알맞지 않습니다.');
+                    setError({...error, password: false });
+                } else {
+                    setValidText('');
+                    setError({...error, password: true });
+                }
+                break;
+            case 'email':
+                if (val != '' && !regEmail.test(val)) {
+                    setValidText('형식에 알맞지 않습니다.');
+                    setError({...error, email: false });
+                } else {
+                    setValidText('');
+                    setError({...error, email: true });
+                }
         }
 
         console.log(error.name, error.mobile);
 
-    }, [error, validText, form]);
+    }, [error, validText]);
 
     // const onChangeName = (e: { target: { value: any; }; }) => {
     //     let regex = /[^ㄱ-ㅎ가-힣]/g;
@@ -111,11 +119,15 @@ const Register = () => {
             </div>
             <div className="register-item">
                 <label htmlFor="register-email-input">Email</label>
-                <input type="text" id="register-email-input" name="email" />
+                <input type="text" id="register-email-input" name="email" 
+                onChange={onChangeHandler}/>
+                <span>{!error.email && validText}</span>
             </div>
             <div className="register-item">
                 <label htmlFor="register-password-input">Password</label>
-                <input type="password" id="register-password-input" name="password" />
+                <input type="password" id="register-password-input" name="password" 
+                onChange={onChangeHandler}/>
+                <span>{!error.password && validText}</span>
             </div>
             <div className="register-item">
                 <label htmlFor="register-repassword-input">Re-enter Password</label>
@@ -141,11 +153,11 @@ const Register = () => {
                 </div>
                 <div className="radio-box">
                     <input type="radio" name="radio" id="register-radio2" />
-                    <label htmlFor="register-radio1">Option 2</label>
+                    <label htmlFor="register-radio2">Option 2</label>
                 </div>
                 <div className="radio-box">
                     <input type="radio" name="radio" id="register-radio3" />
-                    <label htmlFor="register-radio1">Option 3</label>
+                    <label htmlFor="register-radio3">Option 3</label>
                 </div>
             </div>
             <div className="register-item">

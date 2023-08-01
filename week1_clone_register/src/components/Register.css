@@ -37,6 +37,11 @@
     float: left;
 }
 
+.register-form > .register-item > input:focus {
+    background: #e6f0ff;
+    border: none;
+}
+
 .register-form > .register-item > input[type="checkbox"] + label {
     margin-left: 20px;
 }
