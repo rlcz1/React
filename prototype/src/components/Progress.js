@@ -4,6 +4,7 @@ const ProgressContainer = styled.div`
     position: relative;
     width: 50%;
     height: 16px;
+    margin: 0;
     left: 50%;
     transform: translateX(-50%);
 `;
@@ -54,10 +55,11 @@ const Progress = ({ value, ...props }) => {
     } else if (value > 66) {
         background = '#D21404';
     }
+    
     return (
         <ProgressContainer {...props}>
             <Rail />
-            <Track style={{ width: `${value}%`, background: `${background}` }} />
+            <Track style={{ width: `${value}%`, backgroundColor: `${background}` }} />
         </ProgressContainer>
     );
 }

@@ -1,6 +1,7 @@
 import './App.css';
 import styled from '@emotion/styled';
 import Progress from './components/Progress';
+import GetJson from './components/GetJson';
 
 const Box = styled.div`
   width: 330px;
@@ -33,7 +34,7 @@ const dummyData = [
 ];
 
 function App() {
-  return (
+  return (  
     <div className="App">
       {dummyData.map((data) => {
         let a = <Box>
@@ -41,8 +42,10 @@ function App() {
           <Progress value={(data.connected/data.capacity)*100}/>
           <Capacity>{data.connected}명/{data.capacity}명</Capacity>
         </Box>
+
         return a;
       })}
+      {/* <GetJson /> */}
     </div>
   );
 }
