@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 
 const ListItem = styled.li`
     display: flex;
@@ -24,10 +25,12 @@ const Keywords = styled.div`
 
 const EmojiListItem = ({ emoji }) => {
     return (
-        <ListItem onClick={() => navigator.clipboard.writeText(emoji.symbol)}> 
-            <Symbol>{emoji.symbol}</Symbol>
-            <Title>{emoji.title}</Title>
-            <Keywords>{emoji.keywords}</Keywords>
+        <ListItem onClick={() => navigator.clipboard.writeText(emoji.symbol)}>
+            <Link to={`/Emoji/${emoji.title}`}>
+                <Symbol>{emoji.symbol}</Symbol>
+                <Title>{emoji.title}</Title>
+                <Keywords>{emoji.keywords}</Keywords>
+            </Link>
         </ListItem>
     )
 }

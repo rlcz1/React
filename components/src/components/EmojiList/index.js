@@ -13,7 +13,7 @@ const EmojiList = ({ emojis, keyword }) => {
             emoji.title.indexOf(keyword) >= 0 ||
             emoji.keywords.indexOf(keyword) >= 0)
         .slice(0, 10)
-        .map(emoji => <EmojiListItem key={emoji.title} emoji={emoji} /> )}
+        .map(emoji => <EmojiListItem key={emoji.title} emoji={emoji} />)}
     </Container>
 }
 

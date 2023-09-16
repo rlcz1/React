@@ -10,8 +10,6 @@ const Input = styled.input`
 
 const SearchBox = ({onSearch}) => {
     return <Input onChange={(e) => onSearch(e.target.value)} />
-    
-
 }
 
 export default SearchBox;
